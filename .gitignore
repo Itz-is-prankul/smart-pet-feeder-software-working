@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+*.log
+flows_cred.json
+*_cred.json
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
