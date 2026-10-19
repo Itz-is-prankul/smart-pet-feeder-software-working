@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Pet Feeder | Digital IoT Simulation</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#182230;--muted:#687386;--line:#e5eaf1;--teal:#167d75;--teal2:#e4f5f2;--blue:#eaf1ff;--red:#b42318;--redbg:#fff0ee;--amber:#9a6700;--amberbg:#fff6dc;--green:#18794e;--greenbg:#e9f8ef;--shadow:0 8px 26px rgba(28,43,65,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:650;transition:.15s}button:hover{filter:brightness(.97);transform:translateY(-1px)}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9bc8ff;outline-offset:2px}.primary{background:var(--teal);color:white}.secondary{background:#edf1f6;color:#263447}.danger{background:var(--redbg);color:var(--red)}.small{padding:7px 10px;font-size:13px}.app{display:grid;grid-template-columns:238px 1fr;min-height:100vh}.sidebar{background:#132c35;color:#eef9f7;padding:25px 16px;display:flex;flex-direction:column;gap:20px}.brand{display:flex;align-items:center;gap:11px;padding:0 8px 15px;border-bottom:1px solid #31505a}.logo{height:42px;width:42px;border-radius:13px;background:#d5f4e9;color:#135a50;display:grid;place-items:center;font-size:23px}.brand strong{display:block;font-size:16px}.brand span{font-size:12px;color:#b4c9cb}.nav{display:grid;gap:6px}.nav button{background:transparent;color:#c7d8dc;text-align:left;font-weight:550;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#244750;color:white}.nav .ico{width:22px;text-align:center;font-size:17px}.side-note{margin-top:auto;border:1px solid #31505a;background:#1a3942;border-radius:14px;padding:14px;font-size:12px;color:#c7d8dc}.side-note strong{display:block;color:white;margin-bottom:5px}.main{min-width:0;padding:28px clamp(16px,3vw,38px) 45px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);font-weight:800}.topbar h1{font-size:clamp(23px,3vw,31px);line-height:1.2;margin:5px 0 7px;letter-spacing:-.04em}.sub{color:var(--muted);margin:0}.sim-pill{display:inline-flex;align-items:center;gap:7px;background:var(--amberbg);color:var(--amber);border-radius:999px;padding:8px 12px;font-size:12px;font-weight:750;white-space:nowrap}.dot{height:7px;width:7px;border-radius:50%;background:#d99b18}.view{display:none}.view.active{display:block}.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:17px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:19px;box-shadow:var(--shadow);min-width:0}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px}.stat-icon{height:35px;width:35px;border-radius:11px;display:grid;place-items:center;background:var(--teal2);font-size:17px}.stat-value{font-size:28px;font-weight:780;letter-spacing:-.04em;margin:14px 0 3px}.stat-foot{font-size:12px;color:var(--muted)}.cols{grid-template-columns:minmax(0,1.35fr) minmax(280px,.9fr)}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:17px}.card h2{font-size:16px;margin:0 0 4px;letter-spacing:-.02em}.card-head p{margin:0;color:var(--muted);font-size:13px}.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:750;background:var(--greenbg);color:var(--green)}.badge.warn{background:var(--amberbg);color:var(--amber)}.badge.bad{background:var(--redbg);color:var(--red)}.feeder-hero{background:linear-gradient(130deg,#e7f7f2,#f4fbff);border-radius:14px;padding:20px;display:grid;grid-template-columns:1fr 155px;gap:10px;align-items:center}.pet-emoji{font-size:75px;text-align:center;filter:drop-shadow(0 7px 5px #7ca79a33)}.feeder-hero h3{margin:0 0 5px;font-size:21px}.feeder-hero p{color:var(--muted);font-size:13px;margin:0 0 16px}.btn-row{display:flex;flex-wrap:wrap;gap:8px}.meter-label{display:flex;justify-content:space-between;font-size:13px;margin:17px 0 8px}.meter{height:10px;background:#e9edf2;border-radius:999px;overflow:hidden}.meter span{display:block;height:100%;background:linear-gradient(90deg,#167d75,#51b69d);border-radius:999px;transition:width .3s}.note{font-size:12px;color:var(--muted);margin-top:9px}.schedule-list{display:grid;gap:10px}.schedule-item{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px}.time-chip{background:var(--blue);border-radius:10px;padding:9px 10px;font-weight:800;font-size:13px;color:#244e98;min-width:76px;text-align:center}.schedule-item strong{display:block;font-size:13px}.schedule-item small{color:var(--muted)}.right{margin-left:auto}.section-title{font-size:19px;margin:0 0 4px}.section-desc{margin:0 0 20px;color:var(--muted);font-size:14px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{display:grid;gap:6px}.field label{font-size:13px;font-weight:700}.field input,.field select{border:1px solid #dbe2ea;border-radius:10px;padding:11px 12px;background:white;color:var(--ink);width:100%}.form-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:610px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:12px 10px;font-size:13px}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em}tbody tr:last-child td{border-bottom:0}.status-text{font-weight:750;color:var(--green)}.status-text.fail{color:var(--red)}.test-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.test-card{border:1px solid var(--line);border-radius:13px;padding:15px;display:flex;flex-direction:column;gap:9px}.test-card strong{font-size:14px}.test-card p{font-size:12px;color:var(--muted);margin:0;flex:1}.test-result{border-radius:12px;background:#f6f8fb;padding:14px;margin-top:15px;display:none}.test-result.show{display:block}.result-title{font-weight:800;margin-bottom:5px}.result-title.good{color:var(--green)}.result-title.bad{color:var(--red)}.architecture{display:grid;gap:9px;max-width:700px;margin:auto}.arch-node{border:1px solid var(--line);background:#fff;border-radius:12px;padding:14px;text-align:center;font-weight:750}.arch-node span{display:block;font-size:12px;color:var(--muted);font-weight:450}.arch-arrow{text-align:center;color:var(--teal);font-size:23px;line-height:1}.arch-split{display:grid;grid-template-columns:1fr 1fr;gap:10px}.code{background:#14242d;color:#d9f3e8;border-radius:12px;padding:16px;overflow:auto;font:12px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}.event{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.event:last-child{border:0}.event-icon{height:30px;width:30px;display:grid;place-items:center;border-radius:10px;background:var(--greenbg);flex-shrink:0}.event-icon.bad{background:var(--redbg)}.event strong{font-size:13px;display:block}.event small{color:var(--muted)}.toast{position:fixed;bottom:20px;right:20px;background:#172f36;color:white;border-radius:12px;padding:13px 17px;box-shadow:var(--shadow);max-width:340px;display:none;z-index:5}.toast.show{display:block;animation:fade .2s}@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}.footer-note{font-size:12px;color:var(--muted);text-align:center;margin-top:23px}.mobile-menu{display:none}.empty{color:var(--muted);padding:20px;text-align:center;font-size:13px}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.cols{grid-template-columns:1fr}.app{grid-template-columns:200px 1fr}}
+@media(max-width:700px){.app{display:block}.sidebar{padding:13px 14px;gap:12px}.brand{border:0;padding:0}.nav{display:flex;overflow:auto;gap:5px}.nav button{white-space:nowrap;padding:9px 11px;font-size:12px}.side-note{display:none}.main{padding:22px 14px}.topbar{align-items:flex-start;flex-direction:column}.stats{gap:10px}.card{padding:15px}.feeder-hero{grid-template-columns:1fr 90px;padding:15px}.pet-emoji{font-size:56px}.test-grid,.form-grid{grid-template-columns:1fr}.stat-value{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">🐾</div><div><strong>PetFeeder</strong><span>Digital IoT Lab</span></div></div>
+  <nav class="nav" aria-label="Main navigation">
+    <button class="active" data-view="dashboard"><span class="ico">▦</span>Dashboard</button>
+    <button data-view="schedule"><span class="ico">◷</span>Feeding Schedule</button>
+    <button data-view="history"><span class="ico">☷</span>Feeding History</button>
+    <button data-view="simulation"><span class="ico">⚙</span>Device Simulation</button>
+    <button data-view="security"><span class="ico">⬡</span>Cybersecurity</button>
+    <button data-view="architecture"><span class="ico">⌘</span>Architecture & Data</button>
+  </nav>
+  <div class="side-note"><strong>ⓘ Simulation mode</strong>All sensor readings, feeding actions and communication events are simulated in this browser. No physical hardware is connected.</div>
+</aside>
+<main class="main">
+  <header class="topbar">
+    <div><div class="eyebrow">IoT Mini-Project Challenge</div><h1 id="pageTitle">Smart Pet Feeder</h1><p class="sub" id="pageSubtitle">A simple, practical and secure digital feeding simulation.</p></div>
+    <div class="sim-pill"><span class="dot"></span> DIGITAL SIMULATION</div>
+  </header>
+
+  <section class="view active" id="dashboard">
+    <div class="grid stats">
+      <div class="card"><div class="stat-top">Food remaining <span class="stat-icon">🥣</span></div><div class="stat-value" id="foodStat">78%</div><div class="stat-foot" id="foodFoot">Food level normal</div></div>
+      <div class="card"><div class="stat-top">Feeds today <span class="stat-icon">🍽️</span></div><div class="stat-value" id="feedsStat">0 / 3</div><div class="stat-foot">Daily safety limit</div></div>
+      <div class="card"><div class="stat-top">Next feeding <span class="stat-icon">⏰</span></div><div class="stat-value" style="font-size:23px" id="nextStat">08:00 AM</div><div class="stat-foot">Based on your schedule</div></div>
+      <div class="card"><div class="stat-top">Security events <span class="stat-icon">🛡️</span></div><div class="stat-value" id="securityStat">0</div><div class="stat-foot">Rejected requests logged</div></div>
+    </div>
+    <div class="grid cols">
+      <div class="card">
+        <div class="card-head"><div><h2>Feeder overview</h2><p>Virtual device status and manual control</p></div><span class="badge" id="deviceBadge">● Online</span></div>
+        <div class="feeder-hero"><div><h3>Hello, pet parent!</h3><p>Your virtual feeder is ready. Feeding is allowed only when safety checks pass.</p><div class="btn-row"><button class="primary" id="feedNow">🍽 Feed Now · 50 g</button><button class="secondary" id="refreshBtn">↻ Refresh status</button></div></div><div class="pet-emoji">🐶<br><span style="font-size:39px">🥣</span></div></div>
+        <div class="meter-label"><span>Container fill level</span><strong id="foodPercent">78%</strong></div><div class="meter"><span id="foodBar" style="width:78%"></span></div><div class="note" id="foodNote">Food is available for the next feeding.</div>
+        <div style="margin-top:20px"><div class="card-head"><div><h2>Recent activity</h2><p>Latest feeding and security events</p></div><button class="secondary small" data-goto="history">View history</button></div><div id="recentEvents"></div></div>
+      </div>
+      <div class="card"><div class="card-head"><div><h2>Today's schedule</h2><p>Automatic feeding plan</p></div><button class="secondary small" data-goto="schedule">Edit</button></div><div class="schedule-list" id="schedulePreview"></div><div class="note">Scheduled actions run while this digital simulation is open. No physical food is dispensed.</div></div>
+    </div>
+  </section>
+
+  <section class="view" id="schedule">
+    <h2 class="section-title">Feeding Schedule</h2><p class="section-desc">Set feeding times and portion sizes. Changes apply to this digital simulation.</p>
+    <div class="grid cols">
+      <div class="card"><div class="card-head"><div><h2>Schedule settings</h2><p>Choose the times and portions</p></div></div>
+        <div class="form-grid">
+          <div class="field"><label for="time1">Morning feeding time</label><input id="time1" type="time" value="08:00"></div>
+          <div class="field"><label for="qty1">Morning portion (g)</label><input id="qty1" type="number" min="1" max="250" value="50"></div>
+          <div class="field"><label for="time2">Evening feeding time</label><input id="time2" type="time" value="18:00"></div>
+          <div class="field"><label for="qty2">Evening portion (g)</label><input id="qty2" type="number" min="1" max="250" value="50"></div>
+          <div class="field"><label for="dailyLimit">Maximum feeds per day</label><select id="dailyLimit"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></div>
+          <div class="field"><label for="cooldown">Cooldown between feeds</label><select id="cooldown"><option value="0">Off (demo only)</option><option value="1" selected>1 minute (demo)</option><option value="30">30 minutes</option><option value="60">60 minutes</option></select></div>
+        </div>
+        <div class="form-actions"><button class="primary" id="saveSchedule">Save schedule</button><button class="secondary" id="resetSchedule">Reset defaults</button></div>
+      </div>
+      <div class="card"><div class="card-head"><div><h2>Schedule preview</h2><p>Current configured feedings</p></div></div><div class="schedule-list" id="scheduleFull"></div><div class="note">The demo portion amount is an assumed value. It is not measured by a real load cell.</div></div>
+    </div>
+  </section>
+
+  <section class="view" id="history">
+    <h2 class="section-title">Feeding History</h2><p class="section-desc">Each accepted or rejected action is recorded with a timestamp, source, quantity and result.</p>
+    <div class="card"><div class="card-head"><div><h2>Activity log</h2><p id="historyCount">0 records</p></div><button class="secondary small" id="exportCsv">Export CSV</button></div><div class="table-wrap"><table><thead><tr><th>Timestamp</th><th>Command</th><th>Source / user</th><th>Quantity</th><th>Result</th><th>Reason</th></tr></thead><tbody id="historyBody"></tbody></table></div><div class="empty" id="historyEmpty">No events yet. Try Feed Now or run a cybersecurity test.</div></div>
+  </section>
+
+  <section class="view" id="simulation">
+    <h2 class="section-title">Device Simulation</h2><p class="section-desc">Change virtual sensor conditions to test normal operation and edge cases.</p>
+    <div class="grid cols">
+      <div class="card"><div class="card-head"><div><h2>Virtual sensor panel</h2><p>These readings are simulated, not measured.</p></div><span class="badge">Virtual ESP32</span></div>
+        <div class="field"><label for="foodLevel">Food container level: <strong id="levelLabel">78%</strong></label><input id="foodLevel" type="range" min="0" max="100" value="78" style="width:100%;accent-color:var(--teal)"></div>
+        <div class="form-grid" style="margin-top:17px">
+          <div class="field"><label for="networkState">Communication</label><select id="networkState"><option value="online">Online</option><option value="offline">Offline / failure</option></select></div>
+          <div class="field"><label for="sensorState">Sensor state</label><select id="sensorState"><option value="normal">Normal</option><option value="unknown">Unavailable / error</option></select></div>
+        </div>
+        <div class="form-actions"><button class="primary" id="applySensors">Apply simulated state</button><button class="secondary" id="refill">Refill container</button></div>
+        <div class="note">Low food warning threshold: 20%. Feeding is blocked when food is low, communication is offline, or sensor status is unknown.</div>
+      </div>
+      <div class="card"><div class="card-head"><div><h2>Virtual device state</h2><p>Controller checks before actuation</p></div></div><div id="deviceStateList"></div></div>
+    </div>
+  </section>
+
+  <section class="view" id="security">
+    <h2 class="section-title">Cybersecurity Testing</h2><p class="section-desc">Run safe simulated attacks. Rejected requests are logged; attack tests never dispense food.</p>
+    <div class="grid test-grid">
+      <div class="test-card"><strong>✓ Authorized FEED command</strong><p>Valid user and fresh command ID. Should feed if safety checks pass.</p><button class="primary small" data-test="authorized">Run test</button></div>
+      <div class="test-card"><strong>⛔ Unauthorized user</strong><p>Untrusted user attempts to feed the pet. Must be rejected.</p><button class="secondary small" data-test="unauthorized">Run test</button></div>
+      <div class="test-card"><strong>↻ Repeated command</strong><p>Same command ID is sent twice. Duplicate must be rejected.</p><button class="secondary small" data-test="duplicate">Run test</button></div>
+      <div class="test-card"><strong>🕒 Replay old command</strong><p>Expired command is replayed. Timestamp/expiry validation rejects it.</p><button class="secondary small" data-test="replay">Run test</button></div>
+      <div class="test-card"><strong>⚙ Unauthorized schedule change</strong><p>Unprivileged user tries to modify the schedule.</p><button class="secondary small" data-test="schedule">Run test</button></div>
+      <div class="test-card"><strong>🍽 Daily limit exceeded</strong><p>Simulate a request after the daily feed limit is reached.</p><button class="secondary small" data-test="limit">Run test</button></div>
+      <div class="test-card"><strong>📡 Communication failure</strong><p>Simulate network failure and check fail-safe behavior.</p><button class="secondary small" data-test="network">Run test</button></div>
+      <div class="test-card"><strong>🥣 Low-food condition</strong><p>Simulate an empty container and attempt a feed.</p><button class="secondary small" data-test="lowfood">Run test</button></div>
+    </div>
+    <div class="test-result" id="testResult" aria-live="polite"></div>
+    <div class="card" style="margin-top:17px"><div class="card-head"><div><h2>Security principles</h2><p>Controls represented by this simulation</p></div></div><div class="grid test-grid">
+      <div><strong>Authentication</strong><p class="sub">Only recognized users can issue commands.</p></div><div><strong>Command validation</strong><p class="sub">Validate action, portion and safety rules before feeding.</p></div><div><strong>Replay protection</strong><p class="sub">Track unique command IDs and reject expired requests.</p></div><div><strong>Local safety limits</strong><p class="sub">Daily caps and low-food checks override remote requests.</p></div><div><strong>Rate limiting</strong><p class="sub">Cooldown blocks rapid repeated feeding.</p></div><div><strong>Secure communication</strong><p class="sub">A real deployment should use MQTT over TLS, authentication and topic ACLs.</p></div>
+    </div></div>
+  </section>
+
+  <section class="view" id="architecture">
+    <h2 class="section-title">Architecture & Sample Data</h2><p class="section-desc">The system flow and message format required by the project challenge.</p>
+    <div class="grid cols">
+      <div class="card"><div class="card-head"><div><h2>System architecture</h2><p>End-to-end digital workflow</p></div></div><div class="architecture">
+        <div class="arch-node">👤 Pet Owner / Dashboard<span>Schedule, remote feed, status, history</span></div><div class="arch-arrow">↓</div>
+        <div class="arch-node">🔐 Authentication & Validation<span>Permissions, command ID, expiry, rate limit</span></div><div class="arch-arrow">↓</div>
+        <div class="arch-node">☁ MQTT Communication Layer<span>Simulated topics; no real broker connected</span></div><div class="arch-arrow">↓</div>
+        <div class="arch-node">🧠 Virtual ESP32 Controller<span>Schedule and local safety rules</span></div><div class="arch-arrow">↓</div>
+        <div class="arch-split"><div class="arch-node">📏 Virtual sensor<span>Food level</span></div><div class="arch-node">⚙ Virtual motor<span>Food dispensing</span></div></div><div class="arch-arrow">↓</div>
+        <div class="arch-node">🗃 Simulated History<span>Timestamp, quantity, result, security events</span></div>
+      </div></div>
+      <div class="card"><div class="card-head"><div><h2>Sample MQTT command</h2><p>Illustrative JSON message</p></div><button class="secondary small" id="copyJson">Copy JSON</button></div>
+        <pre class="code" id="sampleJson">{
+  "command_id": "cmd1001",
+  "command": "FEED",
+  "quantity_g": 50,
+  "timestamp": "2026-10-17T08:00:00",
+  "user": "user123"
+}</pre>
+        <h2 style="margin-top:19px">Example status response</h2><pre class="code" id="statusJson">{
+  "device_id": "device01",
+  "status": "READY",
+  "food_level_percent": 78,
+  "last_result": "No feeding yet"
+}</pre>
+        <div class="note">The user field is not proof of identity. Real systems must authenticate the sender and authorize the command separately.</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:17px"><div class="card-head"><div><h2>Security improvement ideas</h2><p>Recommended production improvements</p></div></div><ul>
+      <li>Use HTTPS or MQTT over TLS to encrypt communication.</li><li>Authenticate users and assign role-based permissions.</li><li>Use unique, expiring command IDs and reject replayed commands.</li><li>Enforce portion limits, daily limits and cooldowns in the controller.</li><li>Store history persistently and log security events with timestamps.</li><li>Keep scheduled feeding locally available if cloud communication fails, where a real RTC and controller are installed.</li><li>Validate sensor readings and detect motor jams in a physical implementation.</li>
+    </ul></div>
+  </section>
+  <div class="footer-note">Smart Pet Feeder • IoT Mini-Project Challenge • Digital simulation only</div>
+</main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const state={food:78,feeds:0,limit:3,portion1:50,portion2:50,time1:"08:00",time2:"18:00",cooldown:1,network:"online",sensor:"normal",events:[],securityCount:0,seen:new Set(),lastFeed:0,deviceOnline:true};
+const pageInfo={dashboard:["Smart Pet Feeder","A simple, practical and secure digital feeding simulation."],schedule:["Feeding Schedule","Configure automatic feeding times and portions."],history:["Feeding History","Review feeding events and security decisions."],simulation:["Device Simulation","Change virtual sensor and communication conditions."],security:["Cybersecurity Testing","Verify that unauthorized and unsafe commands are rejected."],architecture:["Architecture & Data","Explore the system workflow and sample communication message."]};
+function now(){return new Date().toLocaleString(undefined,{year:"numeric",month:"short",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit"});}
+function toast(s){const t=$("toast");t.textContent=s;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2800);}
+function addEvent(command,source,qty,result,reason,security=false){state.events.unshift({time:now(),command,source,qty,result,reason,security});if(security)state.securityCount++;render();}
+function updateStatus(s){$("statusJson").textContent=JSON.stringify({device_id:"device01",status:state.network==="online"?"READY":"OFFLINE",food_level_percent:state.food,last_result:s},null,2);}
+function safetyReason(){if(state.network!=="online")return "Communication unavailable";if(state.sensor!=="normal")return "Sensor data unavailable";if(state.food<=20)return "Low food level — refill required";if(state.feeds>=state.limit)return "Daily feeding limit reached";if(state.lastFeed&&Date.now()-state.lastFeed<state.cooldown*60000)return "Cooldown active";return "";}
+function feed(source="Dashboard",user="owner",commandId="cmd-"+Date.now(),quantity=50){
+ if(user!=="owner"){addEvent("FEED",user,quantity,"REJECTED","Unauthorized user",true);toast("Rejected: unauthorized user");return false;}
+ if(state.seen.has(commandId)){addEvent("FEED",user,quantity,"REJECTED","Duplicate command ID",true);toast("Rejected: duplicate command");return false;}
+ state.seen.add(commandId);
+ const why=safetyReason();if(why){addEvent("FEED",source,quantity,"REJECTED",why,why!=="Cooldown active");toast("Feed blocked: "+why);return false;}
+ state.feeds++;state.lastFeed=Date.now();state.food=Math.max(0,state.food-Math.max(1,quantity)/5);
+ addEvent("FEED",source,quantity,"ACCEPTED","Simulated dispensing completed");toast("Simulated feed completed: "+quantity+" g");return true;
+}
+function fmtTime(t){const [h,m]=t.split(":").map(Number);const ap=h>=12?"PM":"AM";return String(h%12||12).padStart(2,"0")+":"+String(m).padStart(2,"0")+" "+ap;}
+function nextTime(){const nowD=new Date(), options=[state.time1,state.time2].map(t=>{const [h,m]=t.split(":").map(Number);const d=new Date();d.setHours(h,m,0,0);if(d<=nowD)d.setDate(d.getDate()+1);return d;}).sort((a,b)=>a-b);return options[0]?fmtTime(String(options[0].getHours()).padStart(2,"0")+":"+String(options[0].getMinutes()).padStart(2,"0")):"--";}
+function render(){
+ $("foodStat").textContent=state.food+"%";$("foodFoot").textContent=state.food<=20?"Low food warning":state.food<=40?"Food running low":"Food level normal";
+ $("feedsStat").textContent=state.feeds+" / "+state.limit;$("nextStat").textContent=nextTime();$("securityStat").textContent=state.securityCount;
+ $("foodPercent").textContent=state.food+"%";$("foodBar").style.width=state.food+"%";$("foodNote").textContent=state.food<=20?"Warning: refill the virtual container before feeding.":"Food is available for the next feeding.";
+ $("deviceBadge").textContent=state.network==="online"?"● Online":"● Offline";$("deviceBadge").className="badge "+(state.network==="online"?"":"bad");
+ $("levelLabel").textContent=state.food+"%";$("foodLevel").value=state.food;$("networkState").value=state.network;$("sensorState").value=state.sensor;
+ const schedules=[{time:state.time1,qty:state.portion1,name:"Morning feeding"},{time:state.time2,qty:state.portion2,name:"Evening feeding"}].sort((a,b)=>a.time.localeCompare(b.time));
+ const scheduleHtml=schedules.map(x=>`<div class="schedule-item"><div class="time-chip">${fmtTime(x.time)}</div><div><strong>${x.name}</strong><small>${x.qty} g · automatic</small></div><span class="badge right">Enabled</span></div>`).join("");
+ $("schedulePreview").innerHTML=scheduleHtml;$("scheduleFull").innerHTML=scheduleHtml;
+ $("recentEvents").innerHTML=state.events.slice(0,3).map(e=>`<div class="event"><div class="event-icon ${e.result==="REJECTED"?"bad":""}">${e.result==="REJECTED"?"!":"✓"}</div><div><strong>${e.command} · ${e.result}</strong><small>${e.time} — ${e.reason}</small></div></div>`).join("")||'<div class="empty">No activity yet. Try Feed Now.</div>';
+ $("historyCount").textContent=state.events.length+" records";
+ $("historyBody").innerHTML=state.events.map(e=>`<tr><td>${e.time}</td><td><strong>${e.command}</strong></td><td>${e.source}</td><td>${e.qty?e.qty+" g":"—"}</td><td><span class="status-text ${e.result==="REJECTED"?"fail":""}">${e.result}</span></td><td>${e.reason}</td></tr>`).join("");
+ $("historyEmpty").style.display=state.events.length?"none":"block";
+ $("deviceStateList").innerHTML=[["Communication",state.network==="online"?"Online":"Offline"],["Food sensor",state.sensor==="normal"?"Available":"Unavailable"],["Food level",state.food+"%"],["Safety gate",safetyReason()||"Ready"],["Virtual controller","Running"]].map(([k,v])=>`<div class="event"><div class="event-icon">${k==="Safety gate"&&safetyReason()?"!":"✓"}</div><div><strong>${k}</strong><small>${v}</small></div></div>`).join("");
+ updateStatus(state.events[0]?.reason||"No feeding yet");
+}
+function showView(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===id));$("pageTitle").textContent=pageInfo[id][0];$("pageSubtitle").textContent=pageInfo[id][1];}
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.goto)));
+async function syncNodeRedStatus(showToast=false){
+ try {
+  const response=await fetch("http://localhost:1880/api/status",{method:"GET"});
+  if(!response.ok) throw new Error("Node-RED returned HTTP "+response.status);
+  const data=await response.json();
+  if(typeof data.food_level==="number") state.food=data.food_level;
+  if(typeof data.daily_total==="number") state.feeds=Math.floor(data.daily_total/50);
+  state.network="online";
+  state.deviceOnline=true;
+  render();
+  if(showToast) toast("Connected to Node-RED. Status refreshed.");
+  return true;
+ } catch(err) {
+  if(showToast) toast("Could not reach Node-RED. Check http://localhost:1880 and CORS settings.");
+  return false;
+ }
+}
+async function feedFromNodeRed(){
+ const commandId=(crypto.randomUUID?crypto.randomUUID():"cmd-"+Date.now()+"-"+Math.random().toString(16).slice(2));
+ try {
+  const response=await fetch("http://localhost:1880/api/feed",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({command:"FEED",quantity:50,command_id:commandId,user:"owner"})
+  });
+  const data=await response.json();
+  if(data.status==="SUCCESS"){
+   if(typeof data.food_level==="number") state.food=data.food_level;
+   if(typeof data.daily_total==="number") state.feeds=Math.floor(data.daily_total/50);
+   addEvent("FEED","Node-RED backend",data.quantity||50,"ACCEPTED","Node-RED accepted the command; simulated feed recorded");
+   toast("Node-RED accepted feed command: "+(data.quantity||50)+" g");
+  } else {
+   addEvent("FEED","Node-RED backend",50,"REJECTED",data.reason||"Node-RED rejected the command",true);
+   toast("Feed blocked: "+(data.reason||"Request rejected"));
+  }
+ } catch(err) {
+  addEvent("FEED","Node-RED backend",50,"REJECTED","Could not connect to Node-RED API",true);
+  toast("Cannot reach Node-RED. Check its API and CORS settings.");
+ }
+}
+$("feedNow").addEventListener("click",feedFromNodeRed);
+$("refreshBtn").addEventListener("click",()=>syncNodeRedStatus(true));
+$("saveSchedule").addEventListener("click",()=>{
+ const t1=$("time1").value,t2=$("time2").value,q1=Number($("qty1").value),q2=Number($("qty2").value);
+ if(!t1||!t2||t1===t2||q1<1||q1>250||q2<1||q2>250){toast("Choose different times and portions from 1–250 g");return;}
+ state.time1=t1;state.time2=t2;state.portion1=q1;state.portion2=q2;state.limit=Number($("dailyLimit").value);state.cooldown=Number($("cooldown").value);
+ addEvent("SCHEDULE_UPDATE","owner","—","ACCEPTED","Authorized schedule updated");toast("Schedule saved");
+});
+$("resetSchedule").addEventListener("click",()=>{$("time1").value="08:00";$("time2").value="18:00";$("qty1").value=50;$("qty2").value=50;$("dailyLimit").value="3";$("cooldown").value="1";toast("Default values restored; click Save schedule to apply");});
+$("foodLevel").addEventListener("input",e=>{$("levelLabel").textContent=e.target.value+"%";});
+$("applySensors").addEventListener("click",()=>{state.food=Number($("foodLevel").value);state.network=$("networkState").value;state.sensor=$("sensorState").value;state.deviceOnline=state.network==="online";addEvent("SENSOR_UPDATE","simulation","—","ACCEPTED","Virtual sensor/network state changed");toast("Simulated device state updated");});
+$("refill").addEventListener("click",()=>{state.food=100;state.sensor="normal";$("foodLevel").value=100;$("sensorState").value="normal";addEvent("REFILL","simulation","—","ACCEPTED","Virtual food container refilled");toast("Virtual container refilled to 100%");});
+document.querySelectorAll("[data-test]").forEach(b=>b.addEventListener("click",()=>{
+ const test=b.dataset.test;let result,why,success=false;
+ if(test==="authorized"){success=feed("Security test: authorized","owner","test-auth-"+Date.now(),50);result=success?"ACCEPTED":"REJECTED";why=success?"Authenticated request passed validation and safety checks":state.events[0]?.reason||"Safety check failed";}
+ else if(test==="unauthorized"){result="REJECTED";why="Authentication failed: untrusted user";addEvent("FEED","attacker",50,result,why,true);}
+ else if(test==="duplicate"){const id="duplicate-demo-fixed";state.seen.delete(id);feed("Security test","owner",id,50);result="REJECTED";why="Repeated command ID was detected and rejected";addEvent("FEED","owner",50,result,why,true);}
+ else if(test==="replay"){result="REJECTED";why="Command timestamp expired; replay protection blocked request";addEvent("FEED","unknown sender",50,result,why,true);}
+ else if(test==="schedule"){result="REJECTED";why="Only an authenticated owner may modify feeding schedules";addEvent("SCHEDULE_UPDATE","guest",0,result,why,true);}
+ else if(test==="limit"){const old=state.feeds;state.feeds=state.limit;const r=feed("Security test: daily limit");result="REJECTED";why="Daily feeding limit reached; controller rejected request";addEvent("FEED","owner",50,result,why,true);}
+ else if(test==="network"){const old=state.network;state.network="offline";const r=feed("Security test: network failure");result="REJECTED";why="Communication is offline; remote command rejected";addEvent("FEED","owner",50,result,why,true);state.network=old;}
+ else if(test==="lowfood"){const old=state.food;state.food=10;const r=feed("Security test: low food");result="REJECTED";why="Low food threshold reached; feeding blocked";addEvent("FEED","owner",50,result,why,true);state.food=old;}
+ const box=$("testResult");box.classList.add("show");box.innerHTML=`<div class="result-title ${result==="REJECTED"?"bad":"good"}">${result==="REJECTED"?"🛡 Request rejected safely":"✓ Request accepted"}</div><div><strong>Test:</strong> ${b.textContent.trim()}</div><div><strong>Validation result:</strong> ${why}</div><div class="note">This is a simulated security test; no physical device or food is involved.</div>`;
+}));
+$("exportCsv").addEventListener("click",()=>{const rows=[["Timestamp","Command","Source","Quantity (g)","Result","Reason"],...state.events.map(e=>[e.time,e.command,e.source,e.qty,e.result,e.reason])];const csv=rows.map(r=>r.map(x=>'"'+String(x??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="smart-pet-feeder-history.csv";a.click();URL.revokeObjectURL(a.href);toast("History CSV exported");});
+$("copyJson").addEventListener("click",async()=>{const text=$("sampleJson").textContent;try{await navigator.clipboard.writeText(text);toast("Sample JSON copied");}catch(e){toast("Select and copy the JSON manually");}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("testResult").classList.remove("show");});
+render();
+syncNodeRedStatus(false);
+})();
+</script>
+</body>
+</html>
